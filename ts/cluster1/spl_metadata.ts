@@ -7,6 +7,7 @@ import {
     DataV2Args
 } from "@metaplex-foundation/mpl-token-metadata";
 import { createSignerFromKeypair, signerIdentity, publicKey } from "@metaplex-foundation/umi";
+import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID } from "@solana/spl-token/lib/types/constants";
 
 // Define our Mint address
 const mint = publicKey("<mint address>")
@@ -20,12 +21,20 @@ umi.use(signerIdentity(createSignerFromKeypair(umi, keypair)));
 (async () => {
     try {
         // Start here
-        // let accounts: CreateMetadataAccountV3InstructionAccounts = {
-        //     ???
-        // }
+        let accounts: CreateMetadataAccountV3InstructionAccounts = {
+            metadata: mint,
+            mint: mint,
+            mintAuthority: signer,
+            payer: signer,
+            updateAuthority: keypair.publicKey
+        };
 
         // let data: DataV2Args = {
-        //     ???
+        //     name: "Tast",
+        //     symbol: "Tast",
+        //     uri: "",
+        //     sellerFeeBasisPoints: 0,
+
         // }
 
         // let args: CreateMetadataAccountV3InstructionArgs = {
