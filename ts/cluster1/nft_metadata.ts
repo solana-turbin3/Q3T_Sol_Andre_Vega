@@ -1,4 +1,4 @@
-import wallet from "../wba-wallet.json"
+import wallet from "./wallet/wba-wallet.json"
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
 import { createGenericFile, createSignerFromKeypair, signerIdentity } from "@metaplex-foundation/umi"
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys"
@@ -17,27 +17,27 @@ umi.use(signerIdentity(signer));
         // Follow this JSON structure
         // https://docs.metaplex.com/programs/token-metadata/changelog/v1.0#json-structure
 
-        // const image = ???
-        // const metadata = {
-        //     name: "?",
-        //     symbol: "?",
-        //     description: "?",
-        //     image: "?",
-        //     attributes: [
-        //         {trait_type: '?', value: '?'}
-        //     ],
-        //     properties: {
-        //         files: [
-        //             {
-        //                 type: "image/png",
-        //                 uri: "?"
-        //             },
-        //         ]
-        //     },
-        //     creators: []
-        // };
-        // const myUri = ???
-        // console.log("Your image URI: ", myUri);
+        const image = "https://arweave.net/SF6Uv7t-G-1LIUKDxZ1mNEjsgbmT9r2lFOy9vfoL7v4";
+        const metadata = {
+            name: "Best Rug Ever",
+            symbol: "BRE",
+            description: "You won't find a better rug",
+            image: image,
+            attributes: [
+                {trait_type: 'Rarity', value: 'Mythic'}
+            ],
+            properties: {
+                files: [
+                    {
+                        type: "image/png",
+                        uri: "?"
+                    },
+                ]
+            },
+            creators: []
+        };
+        const myUri = await umi.uploader.uploadJson(metadata);
+        console.log("Your metadata URI: ", myUri);
     }
     catch(error) {
         console.log("Oops.. Something went wrong", error);
