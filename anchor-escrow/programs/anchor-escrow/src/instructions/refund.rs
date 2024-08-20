@@ -42,6 +42,11 @@ pub struct Refund<'info> {
 
 impl<'info> Refund<'info> {
     pub fn withdraw_and_close(&mut self) -> Result<()> {
+        /* 
+         * The type of signer_seeds is [&[&[u8]]; 1], 
+         * which is an array with a single element, 
+         * where that element is a reference to a slice of byte slices (&[&[u8]])
+         */
         let signer_seeds: [&[&[u8]]; 1] = [&[
             b"escrow",
             self.maker.to_account_info().key.as_ref(),
