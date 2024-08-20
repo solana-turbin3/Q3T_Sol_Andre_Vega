@@ -1,1 +1,2 @@
-mod escrow;
+pub mod escrow;
+pub use escrow::*;
