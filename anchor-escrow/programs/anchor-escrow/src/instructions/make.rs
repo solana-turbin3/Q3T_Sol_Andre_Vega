@@ -44,9 +44,8 @@ pub struct Make<'info> {
 }
 
 impl<'info> Make<'info> {
-    pub fn init_escrow(&mut self, seed: u64, receive: u64, bumps: &MakeBumps) -> Result<()> {
+    pub fn init_escrow(&mut self, seed: u64, receive: u64, bump: u8) -> Result<()> {
         // Get bumps for the automated generated bump via anchor that ensures it is not on the curve
-        let bump = bumps.escrow;
         self.escrow.set_inner(Escrow {
             seed,
             maker: self.maker.key(),
@@ -59,7 +58,7 @@ impl<'info> Make<'info> {
         Ok(())
     }
 
-    pub fn deposi_to_vault(&mut self, amount: u64) -> Result<()> {
+    pub fn deposit_to_vault(&mut self, amount: u64) -> Result<()> {
         let accounts = TransferChecked {
             from: self.maker_ata_a.to_account_info(),
             mint: self.mint_a.to_account_info(),

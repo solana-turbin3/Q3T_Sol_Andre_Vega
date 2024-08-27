@@ -2,3 +2,7 @@
 node_modules
 target
 .DS_Store
+anchor-escrow/package-lock.json
+anchor-escrow/yarn-error.log
+anchor-escrow/yarn.lock
+anchor-escrow/yarn.lock
